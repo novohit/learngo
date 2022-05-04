@@ -40,7 +40,7 @@ func grade(score int) string {
 	return res
 }
 func main() {
-	const filename = "basic/abc.txt"
+	const filename = "basic/branch/abc.txt"
 	// 获取文件的全部内容 content是一个字节数组
 	contents, err := ioutil.ReadFile(filename)
 	if err != nil {
