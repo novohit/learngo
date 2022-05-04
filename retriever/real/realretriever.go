@@ -11,8 +11,8 @@ type Retriever struct {
 	TimeOut   time.Duration
 }
 
-// Get real.Retriever结构实现了Retriever的接口
-func (r Retriever) Get(url string) string {
+// Get real.Retriever结构实现了Retriever的接口 指针接收者实现
+func (r *Retriever) Get(url string) string {
 	resp, err := http.Get(url)
 	if err != nil {
 		panic(err)
