@@ -8,6 +8,8 @@ func printSlice(s []int) {
 func main() {
 	// 创建slice方式一
 	var s []int // Zero value for slice is nil
+	temp := []int{2, 3, 3}
+	fmt.Println(temp)
 	fmt.Println(s)
 	for i := 0; i < 100; i++ {
 		fmt.Printf("len(s) = %d, cap = %d \n", len(s), cap(s)) // 可以看出每次扩容为原来的两倍
