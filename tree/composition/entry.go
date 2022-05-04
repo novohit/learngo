@@ -64,10 +64,18 @@ func main() {
 	pRoot.Print()
 
 	// 传nil
+	fmt.Println("----------")
 	var ptr *tree.Node
+	ptr = &tree.Node{Val: 11}
+	ptr.Left = &tree.Node{Val: 10}
+	ptr.Right = &tree.Node{Val: 12}
 	fmt.Println(ptr)
-	ptr.SetValue(10)
+	ptr.InOrder()
+	fmt.Println("------------")
+	ptr.SetValue(9)
+	ptr.InOrder()
 	// 中序遍历
+	fmt.Println()
 	root.InOrder()
 	fmt.Println()
 
