@@ -11,6 +11,34 @@ type Retriever interface {
 	Get(url string) string
 }
 
+type Poster interface {
+	Post(url string, form map[string]string) string
+}
+
+// RetrieverPoster 组合接口
+type RetrieverPoster interface {
+	Retriever
+	Poster
+}
+
+const url = "https://www.imooc.com"
+
+// 使用这个组合接口去Post和Get
+func session(s RetrieverPoster) string {
+
+	s.Post(url, map[string]string{
+		"contents": "another faked data",
+	})
+	return s.Get(url)
+}
+
+func upload(poster Poster) {
+	poster.Post("https://www.imooc.com", map[string]string{
+		"name": "zwx",
+		"age":  "18",
+	})
+}
+
 func download(r Retriever) string {
 	return r.Get("https://www.imooc.com")
 }
@@ -60,4 +88,7 @@ func main() {
 		fmt.Println(mockRetriever.Contents) // 如果断言失败：interface conversion: main.Retriever is real.Retriever, not mock.Retrieve
 	}
 
+	fmt.Println("=======组合接口=======")
+	s := &mock.Retriever{Contents: "this is a fake message"}
+	fmt.Println(session(s))
 }
