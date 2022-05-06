@@ -20,7 +20,7 @@ type userError interface {
 func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 	logger, _ := zap.NewProduction()
 	return func(writer http.ResponseWriter, request *http.Request) {
-
+		// 自己recover处理
 		defer func() {
 			r := recover()
 			if r != nil {
@@ -35,6 +35,7 @@ func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 			logger.Warn("Error handling request: " + err.Error())
 			code := http.StatusOK
 
+			// Type Assertion 类型断言
 			if userError, ok := err.(userError); ok {
 				http.Error(writer, userError.Message(), http.StatusBadRequest)
 				return
