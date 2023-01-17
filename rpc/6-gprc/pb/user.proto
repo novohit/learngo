@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+/**
+1 看官方文档安装https://grpc.io/docs/languages/go/quickstart/
+2 go get google.golang.org/grpc
+3 设置option go_package
+4 执行protoc命令
+ */
+
+service HelloService {
+  rpc SayHello(UserRequest) returns (UserResponse);
+}
+
+message UserRequest {
+  string name = 1; // 1是唯一标识符
+  int32 age = 2;
+  repeated string courses = 3;
+}
+
+message UserResponse {
+  int32 code = 1;
+  string data = 2; // 1是唯一标识符
+}
