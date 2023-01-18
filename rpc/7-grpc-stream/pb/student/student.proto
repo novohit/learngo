@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package student;
+
+import "pb/home/car.proto";
+
+option go_package = "learngo/rpc/7-grpc-stream/pb/student";
+
+
+message Student {
+  string name = 1;
+  home.Car car = 2;
+}

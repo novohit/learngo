@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package home;
+
+import "google/protobuf/empty.proto";
+// import路径是相对执行protoc命令的路径 也就是相对build.bat文件
+// 爆红是IDE识别的原因
+import "pb/home/car.proto";
+
+option go_package = ".;home";
+
+message Home {
+  // package.Person
+  message Visitor {
+    string name = 1;
+  }
+  Visitor visitor = 2;
+  google.protobuf.Empty empty = 3;
+  // 这里Car和Home都在同一个package home下 所以可以不用包名前缀引用
+  Car car = 4;
+}

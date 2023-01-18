@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package home;
+
+option go_package = "learngo/rpc/7-grpc-stream/pb/home";
+
+
+message Car {
+  string name = 1;
+}

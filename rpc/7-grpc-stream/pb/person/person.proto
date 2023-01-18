@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package person;
+
+// 生成go文件的路径;go文件的package
+option go_package = ".;person";
+
+// 枚举类型 注意第一个枚举值一定要是0
+enum SEX {
+  // 如果枚举想使用相同的值 要设置option allow_alias = true
+  option allow_alias = true;
+  MALE = 0;
+  FEMALE = 1;
+  OTHER = 3;
+  GIRL = 1;
+}
+
+message Person {
+  string name = 1;
+  int32 age = 2;
+  SEX sex = 3;
+
+  // 切片类型
+  repeated string courses = 4;
+  map<string, string> test_map = 5;
+}
+
+message StreamReq {
+  string data = 1;
+}
+
+message StreamResp {
+  string data = 1;
+}
+
+service ModelTestService {
+  rpc SimpleModel(StreamReq) returns (StreamReq); // 传统 即刻响应
+  rpc ClientStreamModel(stream StreamReq) returns (StreamReq); // 入参为流
+  rpc ServerStreamModel(StreamReq) returns (stream StreamResp); // 服务端数据流模式 出参为流
+  rpc DoubleStreamModel(stream StreamReq) returns (stream StreamReq); // 出入都为流
+}
