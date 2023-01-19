@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "learngo/rpc/8-grpc-metadata/pb";
+
+
+service UserService {
+  rpc GetData(RequestData) returns (ResponseData);
+}
+
+message RequestData {
+  string data = 1;
+}
+
+message ResponseData {
+  int32 code = 1;
+  string data = 2;
+  google.protobuf.Timestamp createTime = 3;
+}
