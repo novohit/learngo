@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+import "pb/validate.proto";
+
+option go_package = "learngo/rpc/12-grpc-error/pb";
+
+
+service UserService {
+  rpc GetData(RequestData) returns (ResponseData);
+}
+
+message RequestData {
+  string data = 3;
+  int64 id = 1 [(validate.rules).int64 = {gte: -90,  lte: 90}];
+  string email = 2 [(validate.rules).string.email = true];
+}
+message ResponseData {
+  int32 code = 1;
+  string data = 2;
+  google.protobuf.Timestamp createTime = 3;
+}
