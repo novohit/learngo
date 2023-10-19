@@ -121,6 +121,8 @@ func query(word string) {
 /**
 在线词典实现
 抓包彩云小译 https://fanyi.caiyunapp.com/
+
+TODO 可优化 添加多个翻译引擎 并行执行提高翻译速度 设置全局flag当一个引擎响应时设置为true
 */
 func main() {
 	// os.Args 命令行参数
